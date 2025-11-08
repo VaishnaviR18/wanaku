@@ -580,37 +580,38 @@ export const getApiV1ForwardsList = async (
 };
 
 /**
- * @summary Remove Forward
+ * @summary Update
  */
-export type putApiV1ForwardsRemoveResponse200 = {
+export type putApiV1ForwardsForwardNameResponse200 = {
   data: null;
   status: 200;
 };
 
-export type putApiV1ForwardsRemoveResponse400 = {
+export type putApiV1ForwardsForwardNameResponse400 = {
   data: null;
   status: 400;
 };
 
-export type putApiV1ForwardsRemoveResponseComposite =
-  | putApiV1ForwardsRemoveResponse200
-  | putApiV1ForwardsRemoveResponse400;
+export type putApiV1ForwardsForwardNameResponseComposite =
+  | putApiV1ForwardsForwardNameResponse200
+  | putApiV1ForwardsForwardNameResponse400;
 
-export type putApiV1ForwardsRemoveResponse =
-  putApiV1ForwardsRemoveResponseComposite & {
+export type putApiV1ForwardsForwardNameResponse =
+  putApiV1ForwardsForwardNameResponseComposite & {
     headers: Headers;
   };
 
-export const getPutApiV1ForwardsRemoveUrl = () => {
-  return `/api/v1/forwards/remove`;
+export const getPutApiV1ForwardsForwardNameUrl = (forwardName: string) => {
+  return `/api/v1/forwards/${forwardName}`;
 };
 
-export const putApiV1ForwardsRemove = async (
+export const putApiV1ForwardsForwardName = async (
+  forwardName: string,
   forwardReference: ForwardReference,
   options?: RequestInit,
-): Promise<putApiV1ForwardsRemoveResponse> => {
-  return customFetch<putApiV1ForwardsRemoveResponse>(
-    getPutApiV1ForwardsRemoveUrl(),
+): Promise<putApiV1ForwardsForwardNameResponse> => {
+  return customFetch<putApiV1ForwardsForwardNameResponse>(
+    getPutApiV1ForwardsForwardNameUrl(forwardName),
     {
       ...options,
       method: "PUT",
@@ -621,9 +622,9 @@ export const putApiV1ForwardsRemove = async (
 };
 
 /**
- * @summary Update
+ * @summary Remove Forward
  */
-export type postApiV1ForwardsUpdateResponse200 = {
+export type deleteApiV1ForwardsForwardNameResponse200 = {
   data: null;
   status: 200;
 };
@@ -643,26 +644,24 @@ export type postApiV1ForwardsUpdateResponseComposite =
   | postApiV1ForwardsUpdateResponse400
   | postApiV1ForwardsUpdateResponse500;
 
-export type postApiV1ForwardsUpdateResponse =
-  postApiV1ForwardsUpdateResponseComposite & {
+export type deleteApiV1ForwardsForwardNameResponse =
+  deleteApiV1ForwardsForwardNameResponseComposite & {
     headers: Headers;
   };
 
-export const getPostApiV1ForwardsUpdateUrl = () => {
-  return `/api/v1/forwards/update`;
+export const getDeleteApiV1ForwardsForwardNameUrl = (forwardName: string) => {
+  return `/api/v1/forwards/${forwardName}`;
 };
 
-export const postApiV1ForwardsUpdate = async (
-  forwardReference: ForwardReference,
+export const deleteApiV1ForwardsForwardName = async (
+  forwardName: string,
   options?: RequestInit,
-): Promise<postApiV1ForwardsUpdateResponse> => {
-  return customFetch<postApiV1ForwardsUpdateResponse>(
-    getPostApiV1ForwardsUpdateUrl(),
+): Promise<deleteApiV1ForwardsForwardNameResponse> => {
+  return customFetch<deleteApiV1ForwardsForwardNameResponse>(
+    getDeleteApiV1ForwardsForwardNameUrl(forwardName),
     {
       ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(forwardReference),
+      method: "DELETE",
     },
   );
 };
@@ -1580,39 +1579,39 @@ export const postApiV1Tools = async (
 /**
  * @summary Add
  */
-export type postApiV1ToolsAddResponse200 = {
+export type postApiV1ToolsResponse200 = {
   data: WanakuResponseToolReference;
   status: 200;
 };
 
-export type postApiV1ToolsAddResponse400 = {
+export type postApiV1ToolsResponse400 = {
   data: null;
   status: 400;
 };
 
-export type postApiV1ToolsAddResponse500 = {
+export type postApiV1ToolsResponse500 = {
   data: WanakuResponse;
   status: 500;
 };
 
-export type postApiV1ToolsAddResponseComposite =
-  | postApiV1ToolsAddResponse200
-  | postApiV1ToolsAddResponse400
-  | postApiV1ToolsAddResponse500;
+export type postApiV1ToolsResponseComposite =
+  | postApiV1ToolsResponse200
+  | postApiV1ToolsResponse400
+  | postApiV1ToolsResponse500;
 
-export type postApiV1ToolsAddResponse = postApiV1ToolsAddResponseComposite & {
+export type postApiV1ToolsResponse = postApiV1ToolsResponseComposite & {
   headers: Headers;
 };
 
-export const getPostApiV1ToolsAddUrl = () => {
-  return `/api/v1/tools/add`;
+export const getPostApiV1ToolsUrl = () => {
+  return `/api/v1/tools`;
 };
 
-export const postApiV1ToolsAdd = async (
+export const postApiV1Tools = async (
   toolReference: ToolReference,
   options?: RequestInit,
-): Promise<postApiV1ToolsAddResponse> => {
-  return customFetch<postApiV1ToolsAddResponse>(getPostApiV1ToolsAddUrl(), {
+): Promise<postApiV1ToolsResponse> => {
+  return customFetch<postApiV1ToolsResponse>(getPostApiV1ToolsUrl(), {
     ...options,
     method: "POST",
     headers: { "Content-Type": "application/json", ...options?.headers },
@@ -1623,41 +1622,41 @@ export const postApiV1ToolsAdd = async (
 /**
  * @summary Add With Payload
  */
-export type postApiV1ToolsAddWithPayloadResponse200 = {
+export type postApiV1ToolsWithPayloadResponse200 = {
   data: WanakuResponseToolReference;
   status: 200;
 };
 
-export type postApiV1ToolsAddWithPayloadResponse400 = {
+export type postApiV1ToolsWithPayloadResponse400 = {
   data: null;
   status: 400;
 };
 
-export type postApiV1ToolsAddWithPayloadResponse500 = {
+export type postApiV1ToolsWithPayloadResponse500 = {
   data: WanakuResponse;
   status: 500;
 };
 
-export type postApiV1ToolsAddWithPayloadResponseComposite =
-  | postApiV1ToolsAddWithPayloadResponse200
-  | postApiV1ToolsAddWithPayloadResponse400
-  | postApiV1ToolsAddWithPayloadResponse500;
+export type postApiV1ToolsWithPayloadResponseComposite =
+  | postApiV1ToolsWithPayloadResponse200
+  | postApiV1ToolsWithPayloadResponse400
+  | postApiV1ToolsWithPayloadResponse500;
 
-export type postApiV1ToolsAddWithPayloadResponse =
-  postApiV1ToolsAddWithPayloadResponseComposite & {
+export type postApiV1ToolsWithPayloadResponse =
+  postApiV1ToolsWithPayloadResponseComposite & {
     headers: Headers;
   };
 
-export const getPostApiV1ToolsAddWithPayloadUrl = () => {
-  return `/api/v1/tools/addWithPayload`;
+export const getPostApiV1ToolsWithPayloadUrl = () => {
+  return `/api/v1/tools/with-payload`;
 };
 
-export const postApiV1ToolsAddWithPayload = async (
+export const postApiV1ToolsWithPayload = async (
   toolPayload: ToolPayload,
   options?: RequestInit,
-): Promise<postApiV1ToolsAddWithPayloadResponse> => {
-  return customFetch<postApiV1ToolsAddWithPayloadResponse>(
-    getPostApiV1ToolsAddWithPayloadUrl(),
+): Promise<postApiV1ToolsWithPayloadResponse> => {
+  return customFetch<postApiV1ToolsWithPayloadResponse>(
+    getPostApiV1ToolsWithPayloadUrl(),
     {
       ...options,
       method: "POST",
@@ -1668,25 +1667,32 @@ export const postApiV1ToolsAddWithPayload = async (
 };
 
 /**
- * @summary List
+ * @summary Update
  */
-export type getApiV1ToolsListResponse200 = {
-  data: WanakuResponseListToolReference;
+export type putApiV1ToolsToolNameResponse200 = {
+  data: null;
   status: 200;
 };
 
-export type getApiV1ToolsListResponse500 = {
+export type putApiV1ToolsToolNameResponse400 = {
+  data: null;
+  status: 400;
+};
+
+export type putApiV1ToolsToolNameResponse500 = {
   data: WanakuResponse;
   status: 500;
 };
 
-export type getApiV1ToolsListResponseComposite =
-  | getApiV1ToolsListResponse200
-  | getApiV1ToolsListResponse500;
+export type putApiV1ToolsToolNameResponseComposite =
+  | putApiV1ToolsToolNameResponse200
+  | putApiV1ToolsToolNameResponse400
+  | putApiV1ToolsToolNameResponse500;
 
-export type getApiV1ToolsListResponse = getApiV1ToolsListResponseComposite & {
-  headers: Headers;
-};
+export type putApiV1ToolsToolNameResponse =
+  putApiV1ToolsToolNameResponseComposite & {
+    headers: Headers;
+  };
 
 export const getGetApiV1ToolsListUrl = (params?: GetApiV1ToolsListParams) => {
   const normalizedParams = new URLSearchParams();
@@ -1720,99 +1726,77 @@ export const getApiV1ToolsList = async (
 /**
  * @summary Remove
  */
-export type putApiV1ToolsRemoveResponse200 = {
+export type deleteApiV1ToolsToolNameResponse200 = {
   data: null;
   status: 200;
 };
 
-export type putApiV1ToolsRemoveResponse500 = {
+export type deleteApiV1ToolsToolNameResponse500 = {
   data: WanakuResponse;
   status: 500;
 };
 
-export type putApiV1ToolsRemoveResponseComposite =
-  | putApiV1ToolsRemoveResponse200
-  | putApiV1ToolsRemoveResponse500;
+export type deleteApiV1ToolsToolNameResponseComposite =
+  | deleteApiV1ToolsToolNameResponse200
+  | deleteApiV1ToolsToolNameResponse500;
 
-export type putApiV1ToolsRemoveResponse =
-  putApiV1ToolsRemoveResponseComposite & {
+export type deleteApiV1ToolsToolNameResponse =
+  deleteApiV1ToolsToolNameResponseComposite & {
     headers: Headers;
   };
 
-export const getPutApiV1ToolsRemoveUrl = (
-  params?: PutApiV1ToolsRemoveParams,
-) => {
-  const normalizedParams = new URLSearchParams();
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
-    }
-  });
-
-  const stringifiedParams = normalizedParams.toString();
-
-  return stringifiedParams.length > 0
-    ? `/api/v1/tools/remove?${stringifiedParams}`
-    : `/api/v1/tools/remove`;
+export const getDeleteApiV1ToolsToolNameUrl = (toolName: string) => {
+  return `/api/v1/tools/${toolName}`;
 };
 
-export const putApiV1ToolsRemove = async (
-  params?: PutApiV1ToolsRemoveParams,
+export const deleteApiV1ToolsToolName = async (
+  toolName: string,
   options?: RequestInit,
-): Promise<putApiV1ToolsRemoveResponse> => {
-  return customFetch<putApiV1ToolsRemoveResponse>(
-    getPutApiV1ToolsRemoveUrl(params),
+): Promise<deleteApiV1ToolsToolNameResponse> => {
+  return customFetch<deleteApiV1ToolsToolNameResponse>(
+    getDeleteApiV1ToolsToolNameUrl(toolName),
     {
       ...options,
-      method: "PUT",
+      method: "DELETE",
     },
   );
 };
 
 /**
- * @summary Update
+ * @summary Get By Name
  */
-export type postApiV1ToolsUpdateResponse200 = {
-  data: null;
+export type getApiV1ToolsToolNameResponse200 = {
+  data: WanakuResponseToolReference;
   status: 200;
 };
 
-export type postApiV1ToolsUpdateResponse400 = {
-  data: null;
-  status: 400;
-};
-
-export type postApiV1ToolsUpdateResponse500 = {
+export type getApiV1ToolsToolNameResponse500 = {
   data: WanakuResponse;
   status: 500;
 };
 
-export type postApiV1ToolsUpdateResponseComposite =
-  | postApiV1ToolsUpdateResponse200
-  | postApiV1ToolsUpdateResponse400
-  | postApiV1ToolsUpdateResponse500;
+export type getApiV1ToolsToolNameResponseComposite =
+  | getApiV1ToolsToolNameResponse200
+  | getApiV1ToolsToolNameResponse500;
 
-export type postApiV1ToolsUpdateResponse =
-  postApiV1ToolsUpdateResponseComposite & {
+export type getApiV1ToolsToolNameResponse =
+  getApiV1ToolsToolNameResponseComposite & {
     headers: Headers;
   };
 
-export const getPostApiV1ToolsUpdateUrl = () => {
-  return `/api/v1/tools/update`;
+export const getGetApiV1ToolsToolNameUrl = (toolName: string) => {
+  return `/api/v1/tools/${toolName}`;
 };
 
-export const postApiV1ToolsUpdate = async (
-  toolReference: ToolReference,
+export const getApiV1ToolsToolName = async (
+  toolName: string,
   options?: RequestInit,
-): Promise<postApiV1ToolsUpdateResponse> => {
-  return customFetch<postApiV1ToolsUpdateResponse>(
-    getPostApiV1ToolsUpdateUrl(),
+): Promise<getApiV1ToolsToolNameResponse> => {
+  return customFetch<getApiV1ToolsToolNameResponse>(
+    getGetApiV1ToolsToolNameUrl(toolName),
     {
       ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(toolReference),
+      method: "GET",
     },
   );
 };

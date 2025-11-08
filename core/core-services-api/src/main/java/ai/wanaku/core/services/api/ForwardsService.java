@@ -3,10 +3,12 @@ package ai.wanaku.core.services.api;
 import ai.wanaku.api.types.ForwardReference;
 import ai.wanaku.api.types.WanakuResponse;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
@@ -33,7 +35,6 @@ public interface ForwardsService {
      * @param reference the forward reference to register
      * @return a {@link Response} indicating the result of the add operation
      */
-    @Path("/add")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -42,13 +43,12 @@ public interface ForwardsService {
     /**
      * Removes a forward reference from the system.
      *
-     * @param reference the forward reference to remove
+     * @param forwardName the name of the forward reference to remove
      * @return a {@link Response} indicating the result of the remove operation
      */
-    @Path("/remove")
-    @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    Response removeForward(ForwardReference reference);
+    @Path("/{forwardName}")
+    @DELETE
+    Response removeForward(@PathParam("forwardName") String forwardName);
 
     /**
      * Lists all registered forward references.
@@ -56,39 +56,19 @@ public interface ForwardsService {
      * @param labelFilter optional label expression to filter forwards by labels
      * @return a {@link WanakuResponse} containing a list of all forward references
      */
-    @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    WanakuResponse<List<ForwardReference>> listForwards(@QueryParam("labelFilter") String labelFilter);
-
-    /**
-     * Lists all registered forward references without filtering.
-     *
-     * @return a {@link WanakuResponse} containing a list of all forward references
-     */
-    default WanakuResponse<List<ForwardReference>> listForwards() {
-        return listForwards(null);
-    }
-
-    /**
-     * Retrieves a forward reference by its name.
-     *
-     * @param name the name of the forward to retrieve
-     * @return a {@link WanakuResponse} containing the forward reference
-     */
-    @Path("/")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    WanakuResponse<ForwardReference> getByName(@QueryParam("name") String name);
+    WanakuResponse<List<ForwardReference>> listForwards();
 
     /**
      * Updates an existing forward reference.
      *
+     * @param forwardName the name of the forward reference to update
      * @param reference the updated forward reference
      * @return a {@link Response} indicating the result of the update operation
      */
-    @Path("/update")
-    @POST
+    @Path("/{forwardName}")
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateForward(ForwardReference reference);
+    Response update(@PathParam("forwardName") String forwardName, ForwardReference reference);
 }
